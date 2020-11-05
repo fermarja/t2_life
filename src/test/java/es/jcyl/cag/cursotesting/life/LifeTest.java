@@ -85,6 +85,18 @@ public class LifeTest {
 	}
 	
 	
+	@Test
+	public void muereConCuatroVecinos() {
+		Life life = new Life(new boolean[][]{
+			{TRUE, TRUE, TRUE},
+			{false, TRUE,  TRUE},
+			{false, false, false}
+		});
+		life.calcularNuevoCiclo();
+		Assert.assertFalse(life.estaViva(1, 1));
+	}
+	
+	
 	
 }
 
