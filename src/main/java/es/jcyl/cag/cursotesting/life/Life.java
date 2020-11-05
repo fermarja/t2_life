@@ -40,7 +40,7 @@ public class Life {
 		return this.tablero[x][y];
 	}
 	
-	public int getCelulasVivas() {
+	public int getContadorCelulasVivas() {
 		int cantidad = 0;
 		for (int i = 0; i < tablero.length; i++) {
 			for (int j = 0; j < tablero[i].length; j++) {
