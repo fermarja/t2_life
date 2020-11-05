@@ -5,6 +5,8 @@ import org.junit.Test;
 
 public class LifeTest {
 
+	private static final boolean TRUE = true;
+	
 	public LifeTest() {
 		super();
 	}
@@ -26,4 +28,16 @@ public class LifeTest {
 		Life life = new Life(10);
 		Assert.assertFalse(life.estaViva(5, 5));
 	}
+	
+	@Test
+	public void mantieneElTableroInicial() {
+		Life life = new Life(new boolean[][]{
+			{false, false, false},
+			{false, TRUE,  false},
+			{false, false, false}
+		});
+		Assert.assertEquals(1, life.getContadorCelulasVivas());
+		Assert.assertTrue(life.estaViva(1, 1));
+	}
 }
+
