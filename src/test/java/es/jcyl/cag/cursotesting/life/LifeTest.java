@@ -62,6 +62,27 @@ public class LifeTest {
 		Assert.assertTrue(life.estaViva(1, 1));
 	}
 	
+	@Test
+	public void sigueVivaConDosVecinos() {
+		Life life = new Life(new boolean[][]{
+			{TRUE, false, TRUE},
+			{false, TRUE,  false},
+			{false, false, false}
+		});
+		life.calcularNuevoCiclo();
+		Assert.assertTrue(life.estaViva(1, 1));
+	}
+	
+	@Test
+	public void sigueVivaConTresVecinos() {
+		Life life = new Life(new boolean[][]{
+			{TRUE, TRUE, TRUE},
+			{false, TRUE,  false},
+			{false, false, false}
+		});
+		life.calcularNuevoCiclo();
+		Assert.assertTrue(life.estaViva(1, 1));
+	}
 	
 	
 	
