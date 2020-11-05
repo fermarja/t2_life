@@ -39,5 +39,16 @@ public class LifeTest {
 		Assert.assertEquals(1, life.getContadorCelulasVivas());
 		Assert.assertTrue(life.estaViva(1, 1));
 	}
+	
+	@Test
+	public void muereSiEstaSola() {
+		Life life = new Life(new boolean[][]{
+			{false, false, false},
+			{false, TRUE,  false},
+			{false, false, false}
+		});
+		life.calcularNuevoCiclo();
+		Assert.assertEquals(0, life.getContadorCelulasVivas());
+	}
 }
 
