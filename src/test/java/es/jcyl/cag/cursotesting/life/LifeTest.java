@@ -50,5 +50,20 @@ public class LifeTest {
 		life.calcularNuevoCiclo();
 		Assert.assertEquals(0, life.getContadorCelulasVivas());
 	}
+	
+	@Test
+	public void reviveConTresVecinos() {
+		Life life = new Life(new boolean[][]{
+			{TRUE, TRUE, TRUE},
+			{false, false,  false},
+			{false, false, false}
+		});
+		life.calcularNuevoCiclo();
+		Assert.assertTrue(life.estaViva(1, 1));
+	}
+	
+	
+	
+	
 }
 
