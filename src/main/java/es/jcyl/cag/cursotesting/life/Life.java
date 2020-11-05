@@ -36,6 +36,10 @@ public class Life {
 		}
 	}
 	
+	public boolean estaViva(int x, int y) {
+		return this.tablero[x][y];
+	}
+	
 	public int getCelulasVivas() {
 		int cantidad = 0;
 		for (int i = 0; i < tablero.length; i++) {

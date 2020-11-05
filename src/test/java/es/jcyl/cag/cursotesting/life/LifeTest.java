@@ -20,4 +20,10 @@ public class LifeTest {
 		Life life = new Life(10);
 		Assert.assertEquals(0, life.getCelulasVivas());		
 	}
+	
+	@Test
+	public void inicializaTodoAMuertoCheckIndividual() {
+		Life life = new Life(10);
+		Assert.assertFalse(life.estaViva(5, 5));
+	}
 }
