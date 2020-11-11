@@ -3,7 +3,7 @@ package es.jcyl.cag.cursotesting.life;
 public class Life {
 
 	
-	private boolean[][] tablero;
+	private EstadoVital[][] tablero;
 	
 	public Life() {
 		this(10, 10);
@@ -15,16 +15,21 @@ public class Life {
 	
 	public Life(int ancho, int alto) {
 		super();
-		this.tablero = new boolean[ancho][alto];
+		this.tablero = new EstadoVital[ancho][alto];
+		for (int i = 0; i < tablero.length; i++) {
+			for (int j = 0; j < tablero[i].length; j++) {
+				this.tablero[i][j] = EstadoVital.MUERTA;
+			}
+		}
 	}
 	
-	public Life(boolean[][] tablero) {
+	public Life(EstadoVital[][] tablero) {
 		super();
-		reemplazarTablero(tablero);
+		reemplazarTablero(tablero);		
 	}
 	
 	public void calcularNuevoCiclo() {
-		boolean[][] nuevo = new boolean[this.tablero.length][this.tablero[0].length];
+		EstadoVital[][] nuevo = new EstadoVital[this.tablero.length][this.tablero[0].length];
 		for (int i = 0; i < nuevo.length; i++) {
 			for (int j = 0; j < nuevo[i].length; j++) {
 				nuevo[i][j] = calcularNuevoEstado(i, j);
@@ -33,15 +38,23 @@ public class Life {
 		reemplazarTablero(nuevo);
 	}
 	
-	private boolean calcularNuevoEstado(int x, int y) {
+	private EstadoVital calcularNuevoEstado(int x, int y) {
 		boolean viva = estaViva(x, y);
 		int vecinos = contarVecinosVivos(x,y);
 		
+		boolean vivaEnNuevoEstado = true;
 		if (viva) {
-			return vecinos >= 2 && vecinos <= 3;
+			vivaEnNuevoEstado = vecinos >= 2 && vecinos <= 3;
 		}
 		else {
-			return vecinos == 3;
+			vivaEnNuevoEstado = vecinos == 3;
+		}
+		
+		if (vivaEnNuevoEstado) {
+			return EstadoVital.VIVA;
+		}
+		else {
+			return EstadoVital.MUERTA;
 		}
 	}
 	
@@ -63,8 +76,8 @@ public class Life {
 		return contador;
 	}
 
-	private void reemplazarTablero(boolean[][] nuevo) {
-		this.tablero = new boolean[nuevo.length][nuevo[0].length];
+	private void reemplazarTablero(EstadoVital[][] nuevo) {
+		this.tablero = new EstadoVital[nuevo.length][nuevo[0].length];
 		for (int i = 0; i < tablero.length; i++) {
 			for (int j = 0; j < tablero[i].length; j++) {
 				this.tablero[i][j] = nuevo[i][j];
@@ -73,14 +86,18 @@ public class Life {
 	}
 	
 	public boolean estaViva(int x, int y) {
-		return this.tablero[x][y];
+		return getEstadoVital(x, y) == EstadoVital.VIVA;
 	}
 	
+	public EstadoVital getEstadoVital(int x, int y) {
+		return this.tablero[x][y];
+	}
+
 	public int getContadorCelulasVivas() {
 		int cantidad = 0;
 		for (int i = 0; i < tablero.length; i++) {
 			for (int j = 0; j < tablero[i].length; j++) {
-				if (tablero[i][j]) {
+				if (tablero[i][j] == EstadoVital.VIVA) {
 					cantidad++;
 				}
 			}
